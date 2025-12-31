@@ -27,8 +27,8 @@ services:
     environment:
       LISTEN: /beszel_socket/beszel.sock
       HUB_URL: https://beszel.oxcafebabe.cn
-      KEY: '${BESZEL-AGENT-KEY}'
-      TOKEN: ${BESZEL-AGENT-TOKEN}
+      KEY: '${BESZEL_AGENT_KEY}'
+      TOKEN: ${BESZEL_AGENT_TOKEN}
 volumes:
   beszel-data: null
   beszel-socket: null

@@ -4,7 +4,7 @@ services:
     restart: unless-stopped
     environment:
       NODE_ENV: production
-      ACCESS_KEY: ${ACCESS_KEY}
+      ACCESS_KEY: ${RSSHUB_ACCESS_KEY}
       PROXY_URI: ${PROXY_URI}
     networks:
       - traefik-public

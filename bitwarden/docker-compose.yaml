@@ -11,7 +11,7 @@ services:
       SIGNUPS_ALLOWED: false
       WEB_VAULT_ENABLE: true
       DOMAIN: https://bitwarden.oxcafebabe.cn
-      ADMIN_TOKEN: ${ADMIN_TOKEN}
+      ADMIN_TOKEN: ${BITWARDEN_ADMIN_TOKEN}
     networks:
       - traefik-public
     labels:
