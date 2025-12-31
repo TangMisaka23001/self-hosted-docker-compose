@@ -1,0 +1,37 @@
+services:
+  beszel:
+    image: henrygd/beszel:latest
+    container_name: beszel
+    restart: unless-stopped
+    volumes:
+      - beszel-data:/beszel_data
+      - beszel-socket:/beszel_socket
+    networks:
+      - traefik-public
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.beszel.rule=Host(`beszel.oxcafebabe.cn`)
+      - traefik.http.routers.beszel.entrypoints=websecure
+      - traefik.http.services.beszel.loadbalancer.server.port=8090
+      - traefik.http.routers.beszel.service=beszel
+      - traefik.http.routers.beszel.tls.certresolver=leresolver
+  beszel-agent:
+    image: henrygd/beszel-agent:latest
+    container_name: beszel-agent
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - beszel-data:/var/lib/beszel-agent
+      - beszel-socket:/beszel_socket
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      LISTEN: /beszel_socket/beszel.sock
+      HUB_URL: https://beszel.oxcafebabe.cn
+      KEY: '${BESZEL-AGENT-KEY}'
+      TOKEN: ${BESZEL-AGENT-TOKEN}
+volumes:
+  beszel-data: null
+  beszel-socket: null
+networks:
+  traefik-public:
+    external: true
