@@ -9,12 +9,12 @@ services:
     networks:
       - traefik-public
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.rsshub.rule=Host(`rsshub.oxcafebabe.cn`)"
-      - "traefik.http.routers.rsshub.entrypoints=websecure"
-      - "traefik.http.services.rsshub.loadbalancer.server.port=1200"
-      - "traefik.http.routers.rsshub.service=rsshub"
-      - "traefik.http.routers.rsshub.tls.certresolver=leresolver"
+      - traefik.enable=true
+      - traefik.http.routers.rsshub.rule=Host(`rsshub.oxcafebabe.cn`)
+      - traefik.http.routers.rsshub.entrypoints=websecure
+      - traefik.http.services.rsshub.loadbalancer.server.port=1200
+      - traefik.http.routers.rsshub.service=rsshub
+      - traefik.http.routers.rsshub.tls.certresolver=leresolver
 networks:
   traefik-public:
     external: true
