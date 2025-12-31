@@ -1,0 +1,25 @@
+services:
+  dockge:
+    image: louislam/dockge:1
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - dockge-data:/app/data
+      - /root/self-hosted-docker-compose:/opt/stacks
+    environment:
+      - DOCKGE_STACKS_DIR=/opt/stacks
+    networks:
+      - traefik-public
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.dockge.rule=Host(`dockge.oxcafebabe.cn`)
+      - traefik.http.routers.dockge.entrypoints=websecure
+      - traefik.http.services.dockge.loadbalancer.server.port=5001
+      - traefik.http.routers.dockge.service=dockge
+      - traefik.http.routers.dockge.tls.certresolver=leresolver
+networks:
+  traefik-public:
+    external: true
+
+volumes:
+  dockge-data:
