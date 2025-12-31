@@ -1,0 +1,23 @@
+services:
+  octopus:
+    image: bestrui/octopus
+    container_name: octopus
+    volumes:      
+       - 'octopus:/app/data'
+    restart: unless-stopped
+    networks:
+      - traefik-public
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.octopus.rule=Host(`octopus.oxcafebabe.cn`)
+      - traefik.http.routers.octopus.entrypoints=websecure
+      - traefik.http.services.octopus.loadbalancer.server.port=8080
+      - traefik.http.routers.octopus.service=octopus
+      - traefik.http.routers.octopus.tls.certresolver=leresolver
+
+volumes:
+  octopus:
+
+networks:
+  traefik-public:
+    external: true

@@ -1,0 +1,25 @@
+services:
+  wakeful-cloud:
+    container_name: yarr
+    image: ghcr.io/wakeful-cloud/yarr:latest
+    restart: unless-stopped
+    volumes:
+      - /root/yarr:/data
+    networks:
+      - traefik-public
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.yarr.rule=Host(`yarr.oxcafebabe.cn`)
+      - traefik.http.routers.yarr.entrypoints=websecure
+      - traefik.http.services.yarr.loadbalancer.server.port=7070
+      - traefik.http.routers.yarr.service=yarr
+      - traefik.http.routers.yarr.tls.certresolver=leresolver
+    environment:
+      - TZ=Asia/Shanghai
+      - YARR_AUTHFILE=/data/auth
+      - HTTP_PROXY=${HTTP_PROXY}
+      - HTTPS_PROXY=${HTTPS_PROXY}
+
+networks:
+  traefik-public:
+    external: true

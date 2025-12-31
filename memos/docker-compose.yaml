@@ -1,0 +1,23 @@
+services:
+  memos:
+    image: neosmemo/memos:latest
+    container_name: memos
+    restart: unless-stopped
+    volumes:
+      - memos:/var/opt/memos
+    networks:
+      - traefik-public
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.memos.rule=Host(`memo.oxcafebabe.cn`)
+      - traefik.http.routers.memos.entrypoints=websecure
+      - traefik.http.services.memos.loadbalancer.server.port=5230
+      - traefik.http.routers.memos.service=memos
+      - traefik.http.routers.memos.tls.certresolver=leresolver
+      
+volumes:
+  memos:
+
+networks:
+  traefik-public:
+    external: true
