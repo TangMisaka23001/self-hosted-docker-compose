@@ -1,0 +1,26 @@
+services:
+  bichon:
+    image: rustmailer/bichon:latest
+    container_name: bichon
+    volumes:
+       - 'bichon:/data'
+    restart: unless-stopped
+    networks:
+      - traefik-public
+    environment:
+      BICHON_LOG_LEVEL: info
+      BICHON_ROOT_DIR: /data
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.bichon.rule=Host(`bichon.oxcafebabe.cn`)
+      - traefik.http.routers.bichon.entrypoints=websecure
+      - traefik.http.services.bichon.loadbalancer.server.port=15630
+      - traefik.http.routers.bichon.service=bichon
+      - traefik.http.routers.bichon.tls.certresolver=leresolver
+
+volumes:
+  bichon:
+
+networks:
+  traefik-public:
+    external: true
