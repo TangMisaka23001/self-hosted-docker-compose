@@ -1,0 +1,26 @@
+services:
+  cliproxyapi:
+    image: eceasy/cli-proxy-api:latest
+    container_name: cliproxyapi
+    command: /CLIProxyAPI/CLIProxyAPI --config /data/config.yaml
+    volumes:
+       - 'cliproxyapi:/data'
+    restart: unless-stopped
+    networks:
+      - traefik-public
+    environment:
+      DEPLOY: cloud
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.cliproxyapi.rule=Host(`cpa.oxcafebabe.cn`)
+      - traefik.http.routers.cliproxyapi.entrypoints=websecure
+      - traefik.http.services.cliproxyapi.loadbalancer.server.port=8317
+      - traefik.http.routers.cliproxyapi.service=cliproxyapi
+      - traefik.http.routers.cliproxyapi.tls.certresolver=leresolver
+
+volumes:
+  cliproxyapi:
+
+networks:
+  traefik-public:
+    external: true
