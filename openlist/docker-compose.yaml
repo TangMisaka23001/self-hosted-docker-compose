@@ -1,6 +1,6 @@
 services:
   openlist:
-    image: alpine:latest
+    image: nginx:latest
     container_name: openlist
     networks:
       - traefik-public
