@@ -1,25 +1,16 @@
 services:
   openlist:
-    image: 'openlistteam/openlist:latest'
+    image: alpine:latest
     container_name: openlist
-    user: '0:0'
-    volumes:
-      - 'openlist:/opt/openlist/data'
-    environment:
-      - UMASK=022
     networks:
       - traefik-public
     labels:
       - traefik.enable=true
       - traefik.http.routers.openlist.rule=Host(`openlist.oxcafebabe.cn`)
       - traefik.http.routers.openlist.entrypoints=websecure
-      - traefik.http.services.openlist.loadbalancer.server.port=5244
+      - traefik.http.services.openlist.loadbalancer.server.url=${OPEN_LIST_URL}
       - traefik.http.routers.openlist.service=openlist
       - traefik.http.routers.openlist.tls.certresolver=leresolver
-
-volumes:
-  openlist:
-
 networks:
   traefik-public:
     external: true
