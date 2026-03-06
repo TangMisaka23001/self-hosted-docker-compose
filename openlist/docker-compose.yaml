@@ -2,6 +2,7 @@ services:
   openlist:
     image: nginx:latest
     container_name: openlist
+    restart: unless-stopped
     networks:
       - traefik-public
     labels:
