@@ -8,6 +8,7 @@ services:
       - traefik-public
     volumes:
       - "pocket-id:/app/data"
+      - /root/.ssh/id_rsa:/app/data/id_rsa
     labels:
       - traefik.enable=true
       - traefik.http.routers.pocket-id.rule=Host(`id.oxcafebabe.cn`)
