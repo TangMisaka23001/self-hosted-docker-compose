@@ -12,7 +12,7 @@ services:
       - traefik-public
     labels:
       - traefik.enable=true
-      - traefik.http.routers.dockge.rule=Host(`dockge.oxcafebabe.cn`)
+      - traefik.http.routers.dockge.rule=Host(`dockge.misakatang.xyz`)
       - traefik.http.routers.dockge.entrypoints=websecure
       - traefik.http.services.dockge.loadbalancer.server.port=5001
       - traefik.http.routers.dockge.service=dockge

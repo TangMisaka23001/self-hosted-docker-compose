@@ -1,0 +1,17 @@
+services:
+  easytier:
+    image: easytier/easytier:latest
+    container_name: easytier
+    hostname: vps-anchor        # 节点名，组网后在列表里认它用
+    restart: unless-stopped
+    network_mode: host          # 必须 host：打洞要真实网络环境，桥接会多一层 NAT 拉低直连率
+    cap_add:
+      - NET_ADMIN               # 创建 TUN 虚拟网卡需要
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    environment:
+      - TZ=Asia/Shanghai
+    command: >
+      --network-name bilibifun
+      --network-secret ${EASYTIER_NETWORK_SECRET}
+      --ipv4 10.144.144.1

@@ -13,7 +13,7 @@ services:
       - --entrypoints.web.http.redirections.entrypoint.permanent=true
       - --entrypoints.websecure.address=:443
       - --certificatesresolvers.leresolver.acme.httpchallenge=true
-      - --certificatesresolvers.leresolver.acme.email=tangbin97@outlook.com
+      - --certificatesresolvers.leresolver.acme.email=${TRAEFIK_ACME_EMAIL}
       - --certificatesresolvers.leresolver.acme.storage=./acme.json
       - --certificatesresolvers.leresolver.acme.httpchallenge.entrypoint=web
     ports:

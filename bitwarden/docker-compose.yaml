@@ -10,23 +10,22 @@ services:
       WEBSOCKET_ENABLE: true
       SIGNUPS_ALLOWED: false
       WEB_VAULT_ENABLE: true
-      DOMAIN: https://bitwarden.oxcafebabe.cn
+      DOMAIN: https://bitwarden.misakatang.xyz
       ADMIN_TOKEN: ${BITWARDEN_ADMIN_TOKEN}
     networks:
       - traefik-public
     labels:
       - traefik.enable=true
-      - traefik.http.routers.bitwarden.rule=Host(`bitwarden.oxcafebabe.cn`)
+      - traefik.http.routers.bitwarden.rule=Host(`bitwarden.misakatang.xyz`)
       - traefik.http.routers.bitwarden.entrypoints=websecure
       - traefik.http.services.bitwarden.loadbalancer.server.port=80
       - traefik.http.routers.bitwarden.service=bitwarden
       - traefik.http.routers.bitwarden.tls.certresolver=leresolver
-      - traefik.http.routers.bitwarden-websocket.rule=Host(`bitwarden.oxcafebabe.cn`) && Path(`/notifications/hub`)
+      - traefik.http.routers.bitwarden-websocket.rule=Host(`bitwarden.misakatang.xyz`)
+        && Path(`/notifications/hub`)
       - traefik.http.routers.bitwarden-websocket.entrypoints=websecure
-      
 volumes:
-  bitwarden:
-
+  bitwarden: null
 networks:
   traefik-public:
     external: true

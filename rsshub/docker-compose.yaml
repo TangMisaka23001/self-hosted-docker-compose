@@ -5,12 +5,11 @@ services:
     environment:
       NODE_ENV: production
       ACCESS_KEY: ${RSSHUB_ACCESS_KEY}
-      PROXY_URI: ${PROXY_URI}
     networks:
       - traefik-public
     labels:
       - traefik.enable=true
-      - traefik.http.routers.rsshub.rule=Host(`rsshub.oxcafebabe.cn`)
+      - traefik.http.routers.rsshub.rule=Host(`rsshub.misakatang.xyz`)
       - traefik.http.routers.rsshub.entrypoints=websecure
       - traefik.http.services.rsshub.loadbalancer.server.port=1200
       - traefik.http.routers.rsshub.service=rsshub

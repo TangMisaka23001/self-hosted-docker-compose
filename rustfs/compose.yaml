@@ -1,0 +1,40 @@
+services:
+  rustfs:
+    image: rustfs/rustfs:latest
+    container_name: rustfs
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Shanghai
+      - RUSTFS_ACCESS_KEY=${RUSTFS_ACCESS_KEY}
+      - RUSTFS_SECRET_KEY=${RUSTFS_SECRET_KEY}
+      - RUSTFS_WEBDAV_ENABLE=true
+      - RUSTFS_WEBDAV_ADDRESS=0.0.0.0:8080
+      - RUSTFS_WEBDAV_TLS_ENABLED=false
+    volumes:
+      - /nas/rustfs/data:/data
+      - /nas/rustfs/logs:/app/logs
+    networks:
+      - traefik-public
+    labels:
+      - traefik.enable=true
+      # S3 API → s3.misakatang.xyz
+      - traefik.http.routers.rustfs-api.rule=Host(`s3.misakatang.xyz`)
+      - traefik.http.routers.rustfs-api.entrypoints=websecure
+      - traefik.http.routers.rustfs-api.tls.certresolver=leresolver
+      - traefik.http.routers.rustfs-api.service=rustfs-api
+      - traefik.http.services.rustfs-api.loadbalancer.server.port=9000
+      # 控制台 → s3-console.misakatang.xyz
+      - traefik.http.routers.rustfs-console.rule=Host(`s3-console.misakatang.xyz`)
+      - traefik.http.routers.rustfs-console.entrypoints=websecure
+      - traefik.http.routers.rustfs-console.tls.certresolver=leresolver
+      - traefik.http.routers.rustfs-console.service=rustfs-console
+      - traefik.http.services.rustfs-console.loadbalancer.server.port=9001
+      # WebDAV → dav.misakatang.xyz
+      - traefik.http.routers.rustfs-dav.rule=Host(`dav.misakatang.xyz`)
+      - traefik.http.routers.rustfs-dav.entrypoints=websecure
+      - traefik.http.routers.rustfs-dav.tls.certresolver=leresolver
+      - traefik.http.routers.rustfs-dav.service=rustfs-dav
+      - traefik.http.services.rustfs-dav.loadbalancer.server.port=8080
+networks:
+  traefik-public:
+    external: true
