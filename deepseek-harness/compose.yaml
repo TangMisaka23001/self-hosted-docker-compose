@@ -1,0 +1,28 @@
+services:
+  dsh:
+    image: smanx/deepseek-harness:devtools-min-latest
+    container_name: dsh
+    restart: unless-stopped
+    mem_limit: 1000m
+    environment:
+      - TZ=Asia/Shanghai
+      - PROXY_USERNAME=${PROXY_USERNAME}
+      - PROXY_PASSWORD=${PROXY_PASSWORD}
+      - NODE_OPTIONS=--max-old-space-size=512
+    volumes:
+      - dsh_data:/root/.dsh
+      - /root/workspace:/workspace
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.dsh.rule=Host(`dsh.misakatang.xyz`)
+      - traefik.http.routers.dsh.entrypoints=websecure
+      - traefik.http.routers.dsh.tls.certresolver=leresolver
+      - traefik.http.routers.dsh.service=dsh
+      - traefik.http.services.dsh.loadbalancer.server.port=3080
+    networks:
+      - traefik-public
+volumes:
+  dsh_data: null
+networks:
+  traefik-public:
+    external: true
