@@ -12,6 +12,7 @@ services:
       - traefik.http.routers.uptime-kuma.rule=Host(`uptime.misakatang.xyz`)
       - traefik.http.routers.uptime-kuma.entrypoints=websecure
       - traefik.http.services.uptime-kuma.loadbalancer.server.port=3001
+      - traefik.http.routers.uptime-kuma.service=uptime-kuma
       - traefik.http.routers.uptime-kuma.tls.certresolver=leresolver
 volumes:
   uptime-kuma: null

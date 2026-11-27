@@ -1,16 +1,14 @@
 services:
   dsh:
-    image: smanx/deepseek-harness:devtools-min-latest
+    image: smanx/deepseek-harness:devtools-min-0.2.2-rc.1
     container_name: dsh
     restart: unless-stopped
-    mem_limit: 1000m
     environment:
       - TZ=Asia/Shanghai
       - PROXY_USERNAME=${PROXY_USERNAME}
       - PROXY_PASSWORD=${PROXY_PASSWORD}
-      - NODE_OPTIONS=--max-old-space-size=512
     volumes:
-      - dsh_data:/root/.dsh
+      - /root/workspace/dsh_data:/root/.dsh
       - /root/workspace:/workspace
     labels:
       - traefik.enable=true
@@ -21,8 +19,6 @@ services:
       - traefik.http.services.dsh.loadbalancer.server.port=3080
     networks:
       - traefik-public
-volumes:
-  dsh_data: null
 networks:
   traefik-public:
     external: true

@@ -1,0 +1,14 @@
+services:
+  obscura:
+    image: h4ckf0r0day/obscura:latest
+    container_name: obscura-mcp
+    restart: unless-stopped
+    command: mcp --http --host 0.0.0.0 --port 3000
+    environment:
+      - OBSCURA_MCP_TOKEN=${OBSCURA_MCP_TOKEN}
+    ports:
+      # 仅在 EasyTier VPN 网段（tun0: 10.144.144.1/24）上开放，不暴露到公网
+      - 10.144.144.1:3000:3000
+networks:
+  traefik-public:
+    external: true

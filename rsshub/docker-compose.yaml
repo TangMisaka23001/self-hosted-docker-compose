@@ -1,6 +1,6 @@
 services:
   rsshub:
-    image: diygod/rsshub:chromium-bundled
+    image: diygod/rsshub:latest
     restart: unless-stopped
     environment:
       NODE_ENV: production

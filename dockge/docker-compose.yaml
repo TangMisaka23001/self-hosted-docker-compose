@@ -20,6 +20,5 @@ services:
 networks:
   traefik-public:
     external: true
-
 volumes:
-  dockge-data:
+  dockge-data: null
