@@ -44,6 +44,7 @@
 | RSSHub | `rsshub/` | `rsshub.misakatang.xyz` | 1200 | RSS 订阅生成 |
 | RustFS | `rustfs/` | `s3` / `s3-console` / `dav.misakatang.xyz` | 9000 / 9001 / 8080 | S3 对象存储 + 控制台 + WebDAV |
 | Subconverter | `subconverter/` | `sub.oxcafebabe.cn` | 25500 | 订阅链接转换 |
+| Uptime Kuma | `uptime-kuma/` | `uptime.misakatang.xyz` | 3001 | 状态监控 |
 | Yarr | `yarr/` | `yarr.misakatang.xyz` | 7070 | RSS 阅读 |
 
 > 注：部分服务仍使用 `oxcafebabe.cn`（Bichon、OpenList、Pocket ID、Subconverter），其余已迁移到 `misakatang.xyz`，按需自行统一。
@@ -79,6 +80,7 @@
 ├── rsshub/           # RSS 生成
 ├── rustfs/           # 对象存储
 ├── subconverter/     # 订阅转换
+├── uptime-kuma/      # 状态监控
 └── yarr/             # RSS 阅读
 ```
 
