@@ -1,0 +1,20 @@
+services:
+  uptime-kuma:
+    image: louislam/uptime-kuma:2
+    container_name: uptime-kuma
+    restart: unless-stopped
+    volumes:
+      - uptime-kuma:/app/data
+    networks:
+      - traefik-public
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.uptime-kuma.rule=Host(`uptime.misakatang.xyz`)
+      - traefik.http.routers.uptime-kuma.entrypoints=websecure
+      - traefik.http.services.uptime-kuma.loadbalancer.server.port=3001
+      - traefik.http.routers.uptime-kuma.tls.certresolver=leresolver
+volumes:
+  uptime-kuma: null
+networks:
+  traefik-public:
+    external: true
