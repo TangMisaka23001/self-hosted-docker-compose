@@ -1,3 +1,4 @@
+# 已弃用：不再维护，配置仅作参考
 services:
   pocket-id:
     image: ghcr.io/pocket-id/pocket-id:v2

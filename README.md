@@ -34,22 +34,22 @@
 | Traefik | `traefik/` | — | 80 / 443 | 反向代理，创建 `traefik-public` 网络 |
 | Beszel | `beszel/` | `beszel.misakatang.xyz` | 8090 | 服务器监控面板 |
 | Beszel Agent | `beszel-agent/` | — | — | 监控探针，host 网络 |
-| Bichon | `bichon/` | `bichon.oxcafebabe.cn` | 15630 | 发信/邮件服务 |
+| Bichon（已弃用） | `bichon/` | `bichon.oxcafebabe.cn` | 15630 | 发信/邮件服务 |
 | Bitwarden | `bitwarden/` | `bitwarden.misakatang.xyz` | 80 | Vaultwarden 密码管理 |
 | DeepSeek Harness | `deepseek-harness/` | `dsh.misakatang.xyz` | 3080 | DeepSeek Harness 服务 |
 | Dockge | `dockge/` | `dockge.misakatang.xyz` | 5001 | Compose 栈管理面板 |
 | Easytier | `easytier/` | — | — | P2P 组网，host 网络 |
 | Memos | `memos/` | `memo.misakatang.xyz` | 5230 | 备忘录 |
 | Obscura | `obscura/` | — | 3000 | MCP 服务，仅 EasyTier 内网访问 |
-| OpenList | `openlist/` | `openlist.oxcafebabe.cn` | — | nginx 反代到 `OPEN_LIST_URL` |
-| Pocket ID | `pocket-id/` | `id.oxcafebabe.cn` | 1411 | OIDC 身份认证 |
+| OpenList（已弃用） | `openlist/` | `openlist.oxcafebabe.cn` | — | nginx 反代到 `OPEN_LIST_URL` |
+| Pocket ID（已弃用） | `pocket-id/` | `id.oxcafebabe.cn` | 1411 | OIDC 身份认证 |
 | RSSHub | `rsshub/` | `rsshub.misakatang.xyz` | 1200 | RSS 订阅生成 |
-| RustFS | `rustfs/` | `s3.misakatang.xyz` / `s3-console.misakatang.xyz` | 9000 / 9001 | S3 对象存储 + 控制台 |
-| Subconverter | `subconverter/` | `sub.oxcafebabe.cn` | 25500 | 订阅链接转换 |
+| RustFS（已弃用） | `rustfs/` | `s3.misakatang.xyz` / `s3-console.misakatang.xyz` | 9000 / 9001 | S3 对象存储 + 控制台 |
+| Subconverter（已弃用） | `subconverter/` | `sub.oxcafebabe.cn` | 25500 | 订阅链接转换 |
 | Uptime Kuma | `uptime-kuma/` | `uptime.misakatang.xyz` | 3001 | 状态监控 |
 | Yarr | `yarr/` | `yarr.misakatang.xyz` | 7070 | RSS 阅读 |
 
-> 注：部分服务仍使用 `oxcafebabe.cn`（Bichon、OpenList、Pocket ID、Subconverter），其余已迁移到 `misakatang.xyz`，按需自行统一。
+> 注：标记为“已弃用”的服务配置仍保留在仓库中，但不再维护。
 
 ## 环境变量
 
@@ -62,10 +62,10 @@
 | `deepseek-harness` | `PROXY_USERNAME`、`PROXY_PASSWORD` |
 | `easytier` | `EASYTIER_NETWORK_SECRET` |
 | `obscura` | `OBSCURA_MCP_TOKEN` |
-| `openlist` | `OPEN_LIST_URL` |
-| `pocket-id` | `APP_URL`、`ENCRYPTION_KEY`（或 `ENCRYPTION_KEY_FILE`）、`TRUST_PROXY`、`MAXMIND_LICENSE_KEY`、`PUID`、`PGID` |
+| `openlist`（已弃用） | `OPEN_LIST_URL` |
+| `pocket-id`（已弃用） | `APP_URL`、`ENCRYPTION_KEY`（或 `ENCRYPTION_KEY_FILE`）、`TRUST_PROXY`、`MAXMIND_LICENSE_KEY`、`PUID`、`PGID` |
 | `rsshub` | `RSSHUB_ACCESS_KEY` |
-| `rustfs` | `RUSTFS_ACCESS_KEY`、`RUSTFS_SECRET_KEY` |
+| `rustfs`（已弃用） | `RUSTFS_ACCESS_KEY`、`RUSTFS_SECRET_KEY` |
 | `traefik` | `TRAEFIK_ACME_EMAIL`（Let's Encrypt 通知邮箱） |
 
 ## 目录结构
@@ -75,20 +75,25 @@
 ├── traefik/          # 反向代理
 ├── beszel/           # 监控面板
 ├── beszel-agent/     # 监控探针
+├── bichon/           # 发信/邮件服务（已弃用）
 ├── bitwarden/        # 密码管理
 ├── deepseek-harness/ # DeepSeek Harness
 ├── dockge/           # 栈管理
 ├── easytier/         # 组网
 ├── memos/            # 备忘录
 ├── obscura/          # MCP 服务
-├── openlist/         # 反代
-├── pocket-id/        # 身份认证
+├── openlist/         # 反代（已弃用）
+├── pocket-id/        # 身份认证（已弃用）
 ├── rsshub/           # RSS 生成
-├── rustfs/           # 对象存储
-├── subconverter/     # 订阅转换
+├── rustfs/           # 对象存储（已弃用）
+├── subconverter/     # 订阅转换（已弃用）
 ├── uptime-kuma/      # 状态监控
 └── yarr/             # RSS 阅读
 ```
+
+## 已弃用的服务
+
+RustFS、Pocket ID、OpenList、Subconverter、Bichon 已弃用；相关目录和配置仅作参考，不再维护或推荐使用。
 
 ## 已移除的服务
 
